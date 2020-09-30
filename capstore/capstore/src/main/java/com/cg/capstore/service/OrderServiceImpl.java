@@ -32,7 +32,7 @@ public class OrderServiceImpl implements IOrderService {
 		}
 		double walletAmount = order.getUser().getWalletAmount() - order.getTotalAmount();
 		userRepository.deductWallet(walletAmount, order.getUser().getUserId());
-
+		System.out.println("Add Order");
 		order.setTime(LocalDateTime.now());
 		return orderRepository.save(order);
 

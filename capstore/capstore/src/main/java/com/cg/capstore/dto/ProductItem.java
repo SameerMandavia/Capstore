@@ -21,7 +21,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Entity
-@AllArgsConstructor
 @Data
 
 @Table(name = "productItem")
