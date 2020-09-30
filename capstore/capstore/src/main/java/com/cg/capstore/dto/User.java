@@ -26,8 +26,6 @@ import lombok.NoArgsConstructor;
  *
  */
 @Entity
-
-
 @Table(name = "user")
 public class User {
 	@Id
@@ -47,24 +45,16 @@ public class User {
 	@Column(name = "gender")
 	private String gender;
 	
-	@Column(name = "contact")
-	private String contact;
+	@Column(name = "contactNo")
+	private String contactNo;
+	
+	@Column(name = "walletAmount")
+	private double walletAmount;
 	
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
 			CascadeType.REFRESH }, mappedBy = "user")
 	private Set<Order> orders;
-
-	@Column(name = "walletAmount")
-	private double walletAmount;
-	
-
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", userName=" + userName + ", emailId=" + emailId + ", password=" + password
-				+ ", gender=" + gender + ", contact=" + contact + ", orders=" + orders + ", walletAmount="
-				+ walletAmount + "]";
-	}
 
 	public int getUserId() {
 		return userId;
@@ -106,20 +96,12 @@ public class User {
 		this.gender = gender;
 	}
 
-	public String getContact() {
-		return contact;
+	public String getContactNo() {
+		return contactNo;
 	}
 
-	public void setContact(String contact) {
-		this.contact = contact;
-	}
-
-	public Set<Order> getOrders() {
-		return orders;
-	}
-
-	public void setOrders(Set<Order> orders) {
-		this.orders = orders;
+	public void setContactNo(String contactNo) {
+		this.contactNo = contactNo;
 	}
 
 	public double getWalletAmount() {
@@ -130,27 +112,39 @@ public class User {
 		this.walletAmount = walletAmount;
 	}
 
-	public User() {
-		super();
-		// TODO Auto-generated constructor stub
+	public Set<Order> getOrders() {
+		return orders;
 	}
 
-	public User(int userId, String userName, String emailId, String password, String gender, String contact,
-			Set<Order> orders, double walletAmount) {
+	public void setOrders(Set<Order> orders) {
+		this.orders = orders;
+	}
+
+	public User(int userId, String userName, String emailId, String password, String gender, String contactNo,
+			double walletAmount, Set<Order> orders) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
 		this.emailId = emailId;
 		this.password = password;
 		this.gender = gender;
-		this.contact = contact;
-		this.orders = orders;
+		this.contactNo = contactNo;
 		this.walletAmount = walletAmount;
+		this.orders = orders;
+	}
+
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", userName=" + userName + ", emailId=" + emailId + ", password=" + password
+				+ ", gender=" + gender + ", contactNo=" + contactNo + ", walletAmount=" + walletAmount + ", orders="
+				+ orders + "]";
 	}
 
 
-	
-
-	
 
 }
