@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.capstore.dto.Login;
 import com.cg.capstore.dto.User;
-import com.cg.capstore.exception.UserNotFoundException;
 import com.cg.capstore.service.UserServiceImpl;
 
 /**
