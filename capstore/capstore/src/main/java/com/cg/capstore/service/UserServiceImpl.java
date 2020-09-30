@@ -82,7 +82,7 @@ public class UserServiceImpl implements IUserService {
 		if(existingUser == null) {
 			throw new UserNotFoundException("User not found with given Id-> "+user.getUserId());
 		}
-		existingUser.setContact(user.getContact());
+		existingUser.setContactNo(user.getContactNo());
 		existingUser.setUserName(user.getUserName());
 		
 		return existingUser;

@@ -13,7 +13,6 @@ import com.cg.capstore.exception.UserNotFoundException;
 import com.cg.capstore.repository.OrderRepository;
 import com.cg.capstore.repository.UserRepository;
 
-
 @Service
 @Transactional
 public class OrderServiceImpl implements IOrderService {
@@ -32,7 +31,7 @@ public class OrderServiceImpl implements IOrderService {
 		}
 		double walletAmount = order.getUser().getWalletAmount() - order.getTotalAmount();
 		userRepository.deductWallet(walletAmount, order.getUser().getUserId());
-		
+
 		order.setTime(LocalDateTime.now());
 		return orderRepository.save(order);
 
@@ -51,11 +50,11 @@ public class OrderServiceImpl implements IOrderService {
 	public List<Order> getAllOrdersByUserId(int userId) {
 
 		List<Order> getAllOrdersByUser = orderRepository.getOrdersByUserId(userId);
-		if(getAllOrdersByUser == null) {
+		if (getAllOrdersByUser == null) {
 			throw new OrderNotFoundException("No Products purchased yet");
 
 		}
-		
+
 		return getAllOrdersByUser;
 	}
 
