@@ -23,7 +23,7 @@ import com.cg.capstore.service.UserServiceImpl;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/capstore")
+@RequestMapping("/capstore")	
 public class UserController {
 
 	@Autowired

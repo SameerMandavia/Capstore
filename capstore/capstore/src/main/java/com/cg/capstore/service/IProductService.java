@@ -16,6 +16,10 @@ public interface IProductService {
 	
 	ProductItem updateProduct(ProductItem product);
 	
-	ProductItem removeProduct(String productName);
+	String removeProduct(String productName);
+	
+	String removeProductByProductType(String productType);
+	
+	String removeProductByProductId(int productId);
 	
 }

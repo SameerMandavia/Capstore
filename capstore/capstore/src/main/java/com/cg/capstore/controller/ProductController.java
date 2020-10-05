@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.capstore.dto.ProductItem;
+import com.cg.capstore.exception.ProductNotFoundException;
 import com.cg.capstore.service.ProductServiceImpl;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -50,8 +51,22 @@ public class ProductController {
 	}
 
 	@DeleteMapping(value="/removeProduct/{productName}")
-	public ProductItem removeProduct(String productName) {
+	public String removeProduct(@PathVariable String productName) {
 		return productService.removeProduct(productName);
+	}
+	
+	@DeleteMapping(value="/removeByProductType/{productType}")
+	public String removeProductByProductType(@PathVariable String productType) {
+		if(productType.isEmpty()) {
+			throw new ProductNotFoundException(productType+" not found");
+		}
+		return productService.removeProductByProductType(productType);
+	}
+	
+	@DeleteMapping(value="/removeByProductId/{productId}")
+	public String removeProductByProductId(@PathVariable int productId) {
+		
+		return productService.removeProductByProductId(productId);
 	}
 
 }
