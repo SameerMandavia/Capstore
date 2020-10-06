@@ -23,14 +23,11 @@ import com.cg.capstore.service.UserServiceImpl;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/capstore")	
+@RequestMapping("/capstore")
 public class UserController {
 
 	@Autowired
 	private UserServiceImpl userService;
-	
-	
-
 
 	/***
 	 * *
@@ -41,6 +38,7 @@ public class UserController {
 
 	@PostMapping(value = "/signUp")
 	public User signUp(@RequestBody User user) {
+
 		return userService.signUp(user);
 
 	}
@@ -68,16 +66,16 @@ public class UserController {
 	public User userLogin(@RequestBody Login login) {
 		return userService.userLogin(login);
 	}
-	
-	@GetMapping(value="/getUserByUserId/{userId}")
+
+	@GetMapping(value = "/getUserByUserId/{userId}")
 	public User getUserByUserId(@PathVariable int userId) {
-		
+
 		return userService.getUserByUserId(userId);
 	}
 
-	@PutMapping(value="/updateUser")
+	@PutMapping(value = "/updateUser")
 	public User updateUser(@RequestBody User user) {
 		return userService.updateUser(user);
 	}
-	
+
 }

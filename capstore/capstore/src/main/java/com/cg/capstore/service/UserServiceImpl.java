@@ -1,5 +1,7 @@
 package com.cg.capstore.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,13 +20,26 @@ public class UserServiceImpl implements IUserService {
 
 	/**
 	 * @param user return user
-	 * 
 	 */
 
 	@Override
 	public User signUp(User user) {
-		User userSignup = userRepository.save(user);
-		return userSignup;
+
+		List<String> allUsername = userRepository.getAllUsername();
+		List<String> allEmailId = userRepository.getAllUserEmailId();
+
+		for (String usernames : allUsername) {
+			if (usernames.equals(user.getUserName())) {
+				throw new UserNotFoundException(user.getUserName() + " Username is already used.");
+			}
+
+		}
+		for (String emailIds : allEmailId) {
+			if (emailIds.equals(user.getEmailId())) {
+				throw new UserNotFoundException("EmailId is already used.");
+			}
+		}
+		return userRepository.save(user);
 	}
 
 	/***
@@ -69,8 +84,8 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public User getUserByUserId(int userId) {
 		User user = userRepository.findById(userId).get();
-		if(user == null) {
-			throw new UserNotFoundException("User not found with given Id-> "+userId);
+		if (user == null) {
+			throw new UserNotFoundException("User not found with given Id-> " + userId);
 		}
 		return user;
 	}
@@ -79,12 +94,12 @@ public class UserServiceImpl implements IUserService {
 	public User updateUser(User user) {
 
 		User existingUser = userRepository.findById(user.getUserId()).get();
-		if(existingUser == null) {
-			throw new UserNotFoundException("User not found with given Id-> "+user.getUserId());
+		if (existingUser == null) {
+			throw new UserNotFoundException("User not found with given Id-> " + user.getUserId());
 		}
 		existingUser.setContactNo(user.getContactNo());
 		existingUser.setUserName(user.getUserName());
-		
+
 		return existingUser;
 	}
 

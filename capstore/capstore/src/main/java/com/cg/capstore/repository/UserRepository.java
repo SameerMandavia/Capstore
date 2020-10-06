@@ -1,5 +1,7 @@
 package com.cg.capstore.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -28,4 +30,11 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	@Query("UPDATE User u SET u.walletAmount = ?1 WHERE u.userId =?2")
 	int deductWallet(double walletAmount,int userId);
 	
+	@Query("SELECT user.userName FROM User user")
+	public List<String> getAllUsername();
+	
+	@Query("SELECT user.emailId FROM User user")
+	public List<String> getAllUserEmailId();
+	
+
 }
