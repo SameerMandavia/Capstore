@@ -14,5 +14,7 @@ public interface IUserService {
 	public User getUserByUserId(int userId);
 	
 	public User updateUser(User user);
+	
+	public String forgetPassword(String userName);
 
 }

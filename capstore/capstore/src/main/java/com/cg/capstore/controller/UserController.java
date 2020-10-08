@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.capstore.dto.Login;
 import com.cg.capstore.dto.User;
+import com.cg.capstore.service.MailServiceImpl;
 import com.cg.capstore.service.UserServiceImpl;
 
 /**
@@ -28,6 +29,9 @@ public class UserController {
 
 	@Autowired
 	private UserServiceImpl userService;
+	
+	@Autowired
+	private MailServiceImpl mailService;
 
 	/***
 	 * *
@@ -38,7 +42,6 @@ public class UserController {
 
 	@PostMapping(value = "/signUp")
 	public User signUp(@RequestBody User user) {
-
 		return userService.signUp(user);
 
 	}
@@ -76,6 +79,12 @@ public class UserController {
 	@PutMapping(value = "/updateUser")
 	public User updateUser(@RequestBody User user) {
 		return userService.updateUser(user);
+	}
+
+	@GetMapping(value = "/forgetPassword/{userName}")
+	public String forgetPassword(@PathVariable String userName) {
+
+		return userService.forgetPassword(userName);
 	}
 
 }

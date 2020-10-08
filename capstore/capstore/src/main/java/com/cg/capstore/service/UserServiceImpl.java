@@ -17,6 +17,8 @@ public class UserServiceImpl implements IUserService {
 
 	@Autowired
 	UserRepository userRepository;
+	@Autowired
+	private MailServiceImpl mailService;
 
 	/**
 	 * @param user return user
@@ -26,7 +28,7 @@ public class UserServiceImpl implements IUserService {
 	public User signUp(User user) {
 
 		List<String> allUsername = userRepository.getAllUsername();
-		List<String> allEmailId = userRepository.getAllUserEmailId();
+		//List<String> allEmailId = userRepository.getAllUserEmailId();
 
 		for (String usernames : allUsername) {
 			if (usernames.equals(user.getUserName())) {
@@ -34,11 +36,14 @@ public class UserServiceImpl implements IUserService {
 			}
 
 		}
-		for (String emailIds : allEmailId) {
-			if (emailIds.equals(user.getEmailId())) {
-				throw new UserNotFoundException("EmailId is already used.");
-			}
-		}
+//		for (String emailIds : allEmailId) {
+//			if (emailIds.equals(user.getEmailId())) {
+//				throw new UserNotFoundException("EmailId is already used.");
+//			}
+//		}
+		mailService.sendMail(user.getEmailId(),"Welcome to Capstore "+user.getUserName()+" your account created successfully.", "Capstore account created successfully:)");
+
+
 		return userRepository.save(user);
 	}
 
@@ -101,6 +106,16 @@ public class UserServiceImpl implements IUserService {
 		existingUser.setUserName(user.getUserName());
 
 		return existingUser;
+	}
+
+	@Override
+	public String forgetPassword(String userName) {
+
+		String userPassword = userRepository.getUserPassword(userName);
+		if (userPassword == null) {
+			throw new UserNotFoundException("User not found with this " + userName);
+		}
+		return userPassword;
 	}
 
 }
