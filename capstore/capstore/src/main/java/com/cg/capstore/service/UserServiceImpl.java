@@ -41,7 +41,7 @@ public class UserServiceImpl implements IUserService {
 //				throw new UserNotFoundException("EmailId is already used.");
 //			}
 //		}
-		mailService.sendMail(user.getEmailId(),"Welcome to Capstore "+user.getUserName()+" your account created successfully.", "Capstore account created successfully:)");
+		mailService.sendMail(user.getEmailId(),"Welcome to Capstore "+user.getUserName()+". your account created successfully.", "Capstore account created successfully:)");
 
 
 		return userRepository.save(user);
